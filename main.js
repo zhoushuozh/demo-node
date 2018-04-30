@@ -5,7 +5,7 @@ button.addEventListener('click', (e)=>{
 		amount.innerText = parseInt(amount.innerText,10) - 1
 	}
 	script.setAttribute("type","text/javascript")
-	script.src = 'http://jsonpdemo2.com:8002/pay?callback=' + functionName
+	script.src = '/pay?callback=' + functionName
 	document.body.appendChild(script)
 	script.onload = (e) => {
 		e.currentTarget.remove()

@@ -12,7 +12,7 @@ var server = http.createServer(function(request, response){
   
   var temp = url.parse(request.url, true)
   var path = temp.pathname
-  var query = temp.queryvar 
+  var query = temp.query 
   var method = request.method
 
   /******** 从这里开始看，上面不要看 ************/
@@ -39,8 +39,11 @@ var server = http.createServer(function(request, response){
       let amount = fs.readFileSync('./db', 'utf8')
       amount -= 1
       fs.writeFileSync('./db', amount)
+      let callbackName = query.callback
       response.setHeader('Content-Type', 'application/javascript')
-      response.write('amount.innerText = ' + amount)
+      response.write(`
+	${callbackName}.call(undefined,'success')	      
+      `)
       response.end()
     } else { 
       response.statusCode = 404
